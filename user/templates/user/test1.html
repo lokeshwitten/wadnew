@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="{% static 'user/styles.css' %}">
+   <style>
+     #displaycart{
+       text-align: right;
+     }
+   </style>
+</head>
+<body>
+  <a  id ='displaycart'href="{% url 'user:cart' %}" >View Cart</a>
+   {% for dish in dishes%}
+  <form>
+    
+    <label id='laq{{dish.pk}}'>{{dish.name}}</label>
+    
+    <div class="value-button" id="decrease{{dish.pk}}" onclick="decreaseValue('q{{dish.pk}}')" value="Decrease Value">-</div>
+    <input type="number" id="q{{dish.pk}}" value="0" name='quantity' hidden>
+    <div class="value-button" id="increase{{dish.pk}}" onclick="increaseValue('q{{dish.pk}}')" value="Increase Value">+</div>
+    
+  </form>
+  {%endfor%}
+  
+
+  <form action="{% url 'user:test1' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" value='' name='orderdata' id='orderdata'>
+    <input type="submit" value='Proceed to Checkout'>
+  </form>
+
+  <ul id='cart'>
+    
+  </ul>
+  
+
+  <script>
+   
+    function increaseValue(id)
+    {
+      let value=document.getElementById(id).value
+      value++;
+      document.getElementById(id).value=value
+      document.getElementById('orderdata').value+=`${id}+`
+
+      
+      if (value==1)
+      {
+        let  li=document.createElement('li')
+        li.id= `l${id}`
+        li.value=`${value}`
+        li.innerHTML= document.getElementById(`la${id}`).innerHTML+'-'+value
+        document.getElementById('cart').append(li)
+
+      }
+      else{
+        document.getElementById(`l${id}`).value=value
+        quantity=document.getElementById(`l${id}`).value
+        document.getElementById(`l${id}`).innerHTML=document.getElementById(`la${id}`).innerHTML+'-'+value
+      }
+      
+    
+    }
+    function decreaseValue(id)
+    {
+     
+      let value=document.getElementById(id).value
+      if(value==0)
+      {
+        value=0
+        document.getElementById(id).value=value
+      }
+      else if(value==1){
+        document.getElementById('orderdata').value+=`${id}-`
+        value=value-1;
+        document.getElementById(id).value=value
+        //Check whether the cart element exists and if so delete
+        var li=document.getElementById(`l${id}`)
+        li.remove()
+      }
+      else{
+        document.getElementById('orderdata').value+=`${id}-`
+        value=value-1;
+        document.getElementById(id).value=value
+        document.getElementById(`l${id}`).value=value
+        quantity=document.getElementById(`l${id}`).value
+        document.getElementById(`l${id}`).innerHTML=document.getElementById(`la${id}`).innerHTML+'-'+value
+      }
+    }
+    
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Orders</title>
+    <meta name="description" content="Owner login">
+    <!-- Mobile viewport optimized -->
+    <meta name="viewport" content="initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'hoteladmin/orders/bootstrap.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'hoteladmin/orders/bootstrap-theme.min.css' %}">
+    <!--[if lt IE 9]>
+    <script src="html5shiv.js"></script>
+    <script src="respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'hoteladmin/orders/styles.css' %}">
+    <!--New Fonts-->
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+    <link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
+    
+
+</head>
+<body><div class="tab-content">
+                    <div class="tab-pane fade active in" id="tab1">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter confirmation" id="inputConfirmationForSearch">
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <br>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Table No</th>
+                                <th>ORD#</th>
+                                <th>Customer Name</th>
+                                <th>Items</th>
+                                <th>Order Status</th>
+                                
+                                <th>Price</th>
+                                <th>Bill Status</th>
+                                <th>Change Bill Status </th>
+                                
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for order in orders %}
+                            <tr id="{{order.order_id}}">
+                                <td>{{order.table_no}}</td>
+                                <td>
+                                    <a href="{% url 'hoteladmin:expandorder' order.order_no %}" data-toggle="modal" data-backdrop="static">
+                                    {{order.order_no}}
+                                    </a>
+                                </td>
+                                <td>{{order.user.username}}</td>
+                                <td>
+                                    {% for item in order.items.all %}
+                                    <ul>
+                                        <li>{{item.dish.name}} - {{item.quantity}}</li>
+                                    </ul>
+                                    {% endfor %}
+                                </td>
+                                <td>{{order.order_status}}</td>
+                                
+                                <td>{{order.price}}</td>
+                                <td>{{order.bill_status}}</td>
+                                <td> <button id="{{order.order_no}} " , onclick="send_ajax_request('{{order.order_no}}')"> Payment Recieved </button></td>
+
+                            </tr>
+                            {% endfor %}
+                           
+<!-- 
+coloring
+red-if food is not prepared
+yellow-if food is prepared,bill not paid
+green-bill paided
+-->
+                            </tr>
+                            </tbody>
+                            </table>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+    function send_ajax_request(rest_id){
+        $.ajax({
+            url: '{% url "hoteladmin:change_payment_status" %}',
+            contentType: "application/json;charset=utf-8",
+            method: 'GET',
+            data: {
+                "rest_id":rest_id
+            },
+            
+            success: function(data){
+                if(data.flag){
+                    alert(`Order ${rest_id} payment is done`)
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

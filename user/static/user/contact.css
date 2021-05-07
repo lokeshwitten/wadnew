@@ -1,0 +1,44 @@
+.cntfrm{
+    margin-top: 30px;
+  }
+  #hcn{
+    text-align: center;
+    color: rgb(235, 167, 43);
+  }
+  #gr{
+    text-align: center;
+  }
+  /* .cnbox{
+    margin: 60px;
+  } */
+  #name{
+    width:98%;
+    height:50px;
+    margin-top: 20px;
+    /* margin-left: 200px; */
+    font-size: large;
+    display: inline-block;
+  }
+  #email{
+    width:98%;
+    height: 50px;
+    margin-top: 20px;
+    /* margin-left: 32px; */
+    font-size: large;
+  }
+  #message{
+    width:98%;
+    height: 100px;
+     margin-top:10px;
+    /* margin-left: 200px; */
+    font-size: large;
+    
+  }
+#clk{
+  width:150px;
+  height:70px;
+  margin-top:20px;
+  margin-left: 95px;
+  font-size: large;
+  background-color:rgb(235, 167, 43);
+}

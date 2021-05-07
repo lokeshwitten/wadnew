@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success</title>
+</head>
+<body>
+    Order NO: {{order.ord_no}}
+    Order Time : {{order.time}}
+    Items Ordered :<ul>{% for item in order.items.all %} <li>{{item}}</li> </ul> {% endfor %}
+    Price : {{order.price}}
+    Average Time Needed: {{order.avg_time}}
+    Table No : {{order.table_no}}
+    orderdata: {{session}}
+    cart: {{cart}}
+    
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Restaurant</title>
+</head>
+<body>
+<form action="{% url 'user:booking' %}" method="post">
+    {% csrf_token %}
+    <label for="rests" >Choose a Restaurant:</label>
+    <select id="rest" name="rest">
+        {% for restaurant in restaurants %}
+      <option value="{{restaurant.rest_id}}">{{restaurant.name}} {{restaurant.cuisine}} Restaurant-{{restaurant.rest_id}}</option>
+      {%empty%}
+        <option>No restaurants</option>
+      {%endfor%}
+    </select>
+    <input type="submit" value="submit">
+</form>
+</body>
+</html>

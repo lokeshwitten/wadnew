@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+{% load static %}
+{% load mult_tags%}
+<html lang="en">
+<head>
+    
+    
+   
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
+    <style>
+        body{
+            background-color:#ecc19c;
+        }
+        #tnk{
+            text-align: center;
+            color: green;
+        }
+        .rw1:after {
+            content: "";
+            display: table;
+            clear: both;
+          }
+          .cl{
+              float: left;
+              height:750px;
+             
+          }
+          .cl1{
+              width: 70%;
+              margin-left:70px;
+              border:1px solid lightgray;
+              background-color:#0d1137;
+              color:white;
+          }
+          .cl2{
+              width:20%;
+          }
+          #os{
+              text-align: center;
+            }
+        .itm{
+            border:1px solid lightgray;
+            height:90px;
+        }
+        .itm:after {
+            content: "";
+            display: table;
+            clear: both;
+          }
+        
+        #rn{
+            margin-left:8px;
+        }
+        #cn{
+            margin-left:8px;
+        }
+        
+        .tp{
+            margin:10px;
+            margin-left:15px;
+        } 
+        .opt{
+            margin:5px;
+            border:1px solid lightgray;
+            text-align: center;
+            background-color:#1e847f;
+        }
+        .opt a:link{
+              text-decoration: none;
+              color:black;
+          }
+          .opt a:hover{
+            text-decoration: none;
+            color:white;
+           /* font-size: medium; */
+          }
+        .pymt{
+            margin:5px;
+            border:1px solid lightgray;
+            text-align: center;
+            background-color:#1e847f;
+        }
+        .p1{
+            margin:3px;
+            border:1px solid lightgray;
+            text-align: center;
+            background-color:#1e847f;
+        }
+        .p1 a:link{
+              text-decoration: none;
+              color:black;
+          }
+          .p1 a:hover{
+            
+            text-decoration: none;
+            color:white;
+           
+          }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="row">
+        <div class="col-md-8 cart">
+            <div class="title">
+                <div class="row">
+                    <div class="col">
+                        <h4><b>Confirm Order</b></h4>
+                    </div>
+                    <div class="col align-self-center text-right text-muted">{{dishes|length}} items</div>
+                </div>
+            </div>
+            {% for dish,value in dishes.items %}
+            <div class="row border-top border-bottom">
+                <div class="row main align-items-center">
+                    <div class="col-2"><img class="img-fluid" src=""></div>
+                    <div class="col">
+                        
+                        <div class="row">{{dish.name}}  </div>
+                    </div>
+                    <div class="col"> {{value}} </div>
+                    
+                </div>
+            </div>
+            {% endfor %}
+            <div class="back-to-order"><a href="{% url 'user:view_restaurant' code  %}">&leftarrow;</a><span class="text-muted">Back to order</span></div>
+        </div>
+        
+        <div class="col-md-4 summary">
+            <div>
+                <h5><b>Summary</b></h5>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col" style="padding-left:0;">&nbsp;&nbsp; TOTAL ITEMS</div>
+                <div class="col text-right">{{dishes|length}}</div>
+            </div>
+            
+            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                <div class="col">TOTAL PRICE</div>
+                <div class="col text-right">&#x20B9; {{price}}</div>
+            </div> 
+            <form action="{% url 'user:orderconf' %}" method ="post">
+                {% csrf_token %}
+            <input id='table_no' name='table_no' placeholder="Table No" type="number">
+            <button class="btn" id="submit" type="submit">Proceed to place order</button>
+            </form>
+            <h3 id="msg" style="color: red;"></h3>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#table_no").change(
+        function(){
+            var table_no= $(this).val()
+            $.ajax({
+                url : '{% url "user:validate_table_no" %}',
+                data :{
+                    "table_no":table_no
+                },
+                dataType: 'json',
+                success: function(data){
+                    if(data.is_valid){
+                        document.getElementById('submit').disabled=false;
+                        document.getElementById('msg').innerHTML=''
+
+                    }
+                    else{
+                        document.getElementById('submit').disabled=true
+                        document.getElementById('msg').innerHTML='Please enter a valid Table No'
+
+                    }
+                }
+            })
+        }
+    )
+
+</script>
+</body>
+</html>

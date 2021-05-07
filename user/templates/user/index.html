@@ -1,0 +1,161 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="{% static 'user/index.css' %}" type="text/css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a class="o1" href="{% url 'user:login' %}">Login</a>
+        <a class="o2" href="{% url 'user:signup' %}">Signup</a>
+        <a class="o3" href="{% url 'user:contact' %}">Contact Us</a>
+        <a class="o4" href="{% url 'user:signup'%}"><img id="scamg" src="https://img.icons8.com/ios/2x/qr-code--v2.gif" alt=""></a>
+        <img src="https://media.istockphoto.com/vectors/people-set-profession-waiter-vector-id954891426?k=6&m=954891426&s=612x612&w=0&h=WpjbuIUXPGQsZCC2-tGpf0r1ZgNhZTJdCi3Ot1T-p6c=" alt="" id="navimg">
+    </div>
+
+    <div class="row1" id="main">
+        <span id="sp1" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+        <div class="cola one">
+            <div class="box1" id="main1">
+                <img id="img1" src="https://media3.giphy.com/media/l1NbTlEHomLoTEoZBP/giphy.gif">
+            </div>
+        </div>
+        <div class="cola two">
+            <div class="box2">
+                <div class="options" id="opt">
+                         {% if username %}
+                         <a class="o1" href="">Welcome Back {{username}}</a>
+                        {%endif%}
+                        {% if not username%}
+                    <a class="o1" href="{% url 'user:login' %}">Login</a>
+                    <a class="o2" href="{% url 'user:signup' %}">Signup</a>
+                        {%endif%}
+                    <a class="o3" href="{% url 'user:test'%}">Reserve a Table</a>
+                    <a class="o4" href="{% url 'user:qrcode'%}"><img id="scamg" src="https://img.icons8.com/ios/2x/qr-code--v2.gif" alt=""></a>
+                    <a class="o5" href="{% url 'user:logout' %}">Log Out</a>
+                    <a class="o5" href="{% url 'user:rest' %}">Rest Code</a>
+                    <a class="o5" href="{% url 'user:myorders' %}">My Orders</a>
+                    <a class="o5" href="">Reservations</a>
+                </div>
+
+                <img id="logo" src="{% static 'user/tablologo.png' %}">
+                <h1 id="mainheading">TablO</h1>
+                <input type="text" id="search" onkeyup="" placeholder="Search.." title="Type in a category">
+            </div>
+        </div>
+    </div>
+
+    <div class="stepbox">
+        <div class="stepsa">
+            <img class="b1 scan" src="https://media1.giphy.com/media/KjWDaVqI6waTtJmEXT/giphy.webp?cid=ecf05e47i401b8q0fz8rt4brgop90rx50sm3oni5tg19h0xb&rid=giphy.webp" alt="">
+            <h1 class="b1 step1">Scan QR CODE</h1>
+        </div>
+        <div class="stepsb">
+            <h1 class="b3 step2">ORDER</h1>
+            <img class="b3 scan2" src="https://media4.giphy.com/media/26BRJtpO9vE6LJCWk/200w.webp?cid=ecf05e47wth8zbzqqk2y9h27tmy670m5xzmm4fd0hifv4y5y&rid=200w.webp" alt="">
+        </div>
+    </div>
+    <div class="info">
+
+        <div class="info1 inftxt1"><img id="infimg" src="https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375__340.png" alt=""></div>
+        <div class="info1 inftxt2">
+            <p>Don't waste food .</p>
+            <p>Take as much you can eat .</p>
+        </div>
+
+    </div>
+    <div class="rowp">
+        <div class="colp colq">
+            <img class="dish1" src="https://images.unsplash.com/photo-1596450512748-2dae774fc38a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTl8fGluZGlhbiUyMGZvb2R8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" " alt=" ">
+		     <div class="dishname1 ">
+				 <a id="flink " href=" "><h1>INDIAN FOOD</h1></a>
+			 </div>
+		</div>
+		<div class="colp colr ">
+			<img class="dish1 "  src="https://images.unsplash.com/photo-1512152272829-e3139592d56f?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8ZmFzdCUyMGZvb2R8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60 ">
+            <div class="dishname1 ">
+				<a id="flink " href=" "><h1>BURGER</h1></a>
+			</div>
+		</div>
+		<div class="colp cols ">
+            <img class="dish1 " src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8cGl6emF8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60 ">
+			<div class="dishname1 ">
+				<a id="flink " href=" "><h1>PIZZA</h1></a>
+			</div>
+		</div>
+	</div>
+	<div class="rowp ">
+		<div class="colp colq ">
+			<img class="dish1 " src="https://images.unsplash.com/photo-1504712168631-d59c8516c409?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MzV8fGljZWNyZWFtfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60 ">
+            <div class="dishname1 ">
+				<a id="flink " href=" "><h1>ICE CREAM</h1></a>
+			</div>
+		</div>
+		<div class="colp colr ">
+			<img class="dish1 " src="https://images.unsplash.com/photo-1500353391678-d7b57979d6d2?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MzJ8fGNvZmZlZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60 "> 
+         <div class="dishname1 ">
+            <a id="flink " href=" "><h1>COFFEE</h1></a>
+			</div>
+		</div>
+		<div class="colp cols ">
+			<img class="dish1 " src="https://images.unsplash.com/photo-1518047601542-79f18c655718?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTZ8fGNha2V8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60 " >
+            <div class="dishname1 ">
+				<a id="flink " href=" "><h1>CAKE</h1></a>
+			</div>
+		</div> 
+	</div>
+    <hr>
+	<div class="cntfrm ">
+        <h1 id="hcn ">Contact Us</h1>
+        <p id="gr ">Tablo beleive in good relationship with customer , so if you need any help feel free to contact us .</p>
+        <div class="cnbox "id="cnbox ">
+            <form>
+               <input type="text " id="name " name="Name " placeholder="Name... ">
+               <input type="text " id="email " name="Email Id " placeholder="Email Id.. ">
+	           <textarea type="text " id="message " name="Message " placeholder="Message.. "></textarea>
+               <input type="submit " id="clk " value="Send Message ">
+            </form>
+          </div>
+    </div>
+    
+    <div class="foot ">
+        <div class="f f1 ">
+             <h1>About us</h1>
+             <p>
+                 Tablo is made to serve people . It help people to order food sitting in restaurant without any contact. You need to just scan qr code and select from menu and order .
+             </p>
+             <p>
+                 ENJOY YOUR MEAL 
+             </p>
+        </div>
+        <hr>
+        <div class="f f3 ">
+            <h1>SOCIAL MEDIA</h1>
+            <a href=" "><img id="footimg " src="https://img.icons8.com/fluent/2x/instagram-new.png " alt=" "></a>
+            <a href=" "><img id="footimg " src="https://img.icons8.com/fluent/2x/facebook-new.png " alt=" "></a>
+            <a href=" "><img id="footimg " src="https://img.icons8.com/color/2x/youtube-play.png " alt=" "></a>
+            <a href=" "><img id="footimg " src="https://img.icons8.com/fluent/2x/twitter.png " alt=" "></a>
+        </div>
+    </div>
+
+    <script>
+        function openNav() {
+          document.getElementById("mySidenav ").style.width = "250px ";
+          document.getElementById("main ").style.marginLeft = "0px ";
+          document.body.style.backgroundColor = "rgba(0,0,0,0.4) ";
+        }
+        
+        function closeNav() {
+          document.getElementById("mySidenav ").style.width = "0 ";
+          document.getElementById("main ").style.marginLeft= "0 ";
+          document.body.style.backgroundColor = "white ";
+        }
+        </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>endpage</title>
+    <link href="{% static 'user/endpage.css' %}" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <h1 id="tnk">Thank You For Ordering .</h1>
+    <div class="rw1">
+        <div class="cl cl1">
+              <h1 id="os">Order Summary</h1>
+              {% for item  in order.items.all %}
+              <div class="itm">
+              
+               <div class="rdes">
+                <p id="rn">Dish name: {{item.dish.name}}</p>
+                <p id="cn">Quantity : {{item.quantity}}</p>
+                 </div>
+              </div>
+              {% endfor %}
+              
+              
+
+              <div class="tp">
+                  <p>Item Price : {{order.price}}</p>
+                  <p>Taxes: 0</p>
+                  <P>Extra charges : 0</P>
+                  <h2>Total Price : {{order.price}}</h2>
+              </div>
+        </div>
+        <div class="cl cl2">
+            <div class="opt">
+                <a href="{% url 'user:view_restaurant' code %}"><h2>Add Items</h2></a>
+            </div>
+            <div class="opt">
+                <a href=""><h2>Alert Waiter</h2></a>
+            </div>
+            <div class="opt">
+                <a href="#Requestparcel"><h2>Request Parcel</h2></a>
+            </div>
+            <div class="opt">
+                <a href="#ReadytOpay"><h2>Ready To Pay</h2></a>
+            </div>
+            <div class="opt">
+                <a href="{% url 'user:index' %}"><h2>Index</h2></a>
+            </div>
+            <div class="pymt">
+                <h1>Payment Mode</h1>
+                <div class="p1">
+                    <a href="#Cash"><h2>Cash</h2></a>
+                </div>
+                <div class="p1">
+                    <a href="#Card"><h2>Card</h2></a>
+                </div>
+                <div class="p1">
+                    <a href="#UPI"><h2>UPI</h2></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

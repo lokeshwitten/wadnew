@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>AdminIndex</title>
+  <link rel="icon" type="image/png" href="{% static 'hoteladmin/tablologo.png'%}">
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'hoteladmin/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  
+</head>
+
+<body>
+  
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">tablO</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Download QR code
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Edit profile details</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'hoteladmin:logout' %}">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4">
+      <h1 class="display-3">Welcome {{user}}</h1>
+      <p class="lead">We are so glad of your association with us</p>
+      <a href="#" class="btn btn-primary btn-lg">Profile</a>
+    </header>
+
+    <!-- Page Features -->
+    <div class="row text-center">
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src= "{% static 'hoteladmin/foodmenu.jpg' %}" width="300" height="300" alt="">
+          <div class="card-body">
+            <h4 class="card-title">Edit Menu</h4>
+            <p class="card-text">Update your menu here regularly</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-primary">Click here</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="{% static 'hoteladmin/orders.png' %}" width="300" height="300" alt="">
+          <div class="card-body">
+            <h4 class="card-title">Orders</h4>
+            <p class="card-text">Check table-wise orders and statuses</p>
+          </div>
+          <div class="card-footer">
+            <a href="{% url 'hoteladmin:orders'%}" class="btn btn-primary">Click here</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="{% static '/hoteladmin/reserv.jpg' %}" width="300" height="300" alt="">
+          <div class="card-body">
+            <h4 class="card-title">Reservations</h4>
+            <p class="card-text">View and update reservation info</p>
+          </div>
+          <div class="card-footer">
+            <a href="{% url 'hoteladmin:reservations' %}" class="btn btn-primary">Click here</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="{% static '/hoteladmin/feed.jpg' %}" width="300" height="300" alt="">
+          <div class="card-body">
+            <h4 class="card-title">Feedback</h4>
+            <p class="card-text">Check out the feedback given by your customers</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-primary">Click here</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white"></p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{%static '/hoteladmin/jquery.min.js' %}" type="text/javascript"></script>
+  <script src="{%static '/hoteladmin/bootstrap.bundle.min.js' %}" type="text/javascript" ></script>
+
+</body>
+
+</html>

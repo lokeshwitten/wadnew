@@ -1,0 +1,246 @@
+body{
+    margin: 0px;
+    width: 100%; 
+    font-family: "Lato", sans-serif;
+    padding:0px;
+    }
+ .head:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+.head{
+    width: 100%;
+    height:270px;
+    background-color:rgb(58, 5, 5);
+    color: white;
+    position: fixed; 
+    overflow: hidden;
+    top:0;
+}
+.hd{
+    float: left;
+   
+}
+.logo{
+    width:15%;
+    padding: 40px;
+    padding-top:20px;
+    padding-left: 80px;
+    padding-bottom: 0px;
+    height:180px;
+}
+.hdc2{
+    width:30%;
+}
+#logoname{
+    color: white;
+    padding-left:20px;
+    padding-top:0px;
+    font-size:40px;
+}
+#Rinfo{
+    padding-left:20px;
+}
+.rr1:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+.rc1{
+    float: left;
+    width:20%;
+    
+}
+.rating{
+    margin:2px;
+    width:30%;
+   
+    text-align: center;
+    border-right:1px solid white;
+}
+#rimg{
+    width:20px;
+   margin-bottom:0px;
+   margin-right:2px;
+}
+.dlt{
+    margin:2px;
+    width:30%;
+    text-align: center;
+    border-right:1px solid white;
+}
+.cft{
+    margin:2px;
+    width:20%;
+   
+    text-align: center;
+}
+#sm{
+    font-size: x-small;
+    margin-top: 0px;
+   
+}
+.offs{
+ width: 24%;
+ height:200px;
+ padding-left:20px;
+ margin-left:90px;
+ margin-top:20px;
+ /* background-color:rgba(194, 176, 15, 0.836); */
+ border-radius:15px;
+ /* color:black; */
+ text-align: center;
+}
+/* for dishlist */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+.row{
+    margin-top:270px;
+}
+.colm{
+    float: left;
+}
+.dislst{
+ width:25%;
+ height:700px;
+ margin-left: 0px;
+ color: black;
+ position: fixed;
+}
+.disl{
+    width: 90%;
+    height:20px;
+    background-color:white;
+      /* border:1px solid black;   */
+    margin: 8px;
+    margin-top: 12px;
+    margin-right:20px;
+     text-align: right; 
+
+    font-size:20px;
+    color: black;
+}
+.disl a:link{
+    text-decoration: none;
+    color: black;
+}
+.disl a:hover{
+    text-decoration: none;
+    color: green;
+   
+    font-size: medium;
+}
+.dish{
+    width:50%;
+     margin-left:25%; 
+    border-left:1px solid lightgrey;
+     /* border-right:1px solid lightgrey;  */
+   }
+.disr{
+    width: 95%;
+    height:200px;
+   border-bottom:1px solid lightgrey;
+    margin: 10px;
+    margin-left:30px;
+}
+.disrhd{
+    width: 98%;
+    height:100px;
+  
+    margin: 10px;
+    margin-left:30px;
+}
+#cartmsg{
+    width:25%;
+    height:700px;
+     margin-left:75%; 
+    text-align: center;
+    color:rgb(161, 161, 161);
+    position: fixed;
+    /* background-color: brown; */
+   }
+#cart{
+    width:25%;
+    height:700px;
+     margin-left:75%; 
+    text-align: left;
+    color:rgb(161, 161, 161);
+    position: fixed;
+
+   }
+
+
+   .disrw:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+.disclm{
+    float: left;
+}
+.fdimg{
+    width:25%;
+    height: 150px;
+    /* background-color: aqua;  */
+    border:1px solid lightgray;
+    margin-top:15px;
+    border-radius:15px;
+   
+}
+#img1{
+    width:180px;
+    height:100px;
+    border-radius:15px 15px 0px 0px;
+    margin-bottom:0px;
+}
+.slt{
+    width:180px;
+    height:50px;
+    margin:0px;
+    margin-top:0px;
+    margin-left:0px;
+    background-color:green;
+    text-align: center;
+    border: 1px solid lightgray;
+}
+#qtt{
+    text-align: center;
+    margin-bottom:2px;
+}
+#sltqtt{
+   margin-top:0px;
+   padding:3px; 
+}
+.disdesc{
+     margin:20px;
+    margin-top:15px;
+}
+#veg{
+    width:25px;
+    margin:10px;
+    margin-top:30px;
+    margin-bottom:2px;
+}
+#dishname{
+    margin-left:10px;
+    font-size: large;
+    margin-top: 0px;
+    margin-bottom: 2px;
+}
+#dishprice{
+    margin-left:10px;
+    font-size: large;
+    margin-top: 0px;
+}
+.coupon{
+    width:180px;
+    height:20px;
+    margin-left:10px;
+    background-color:lightgoldenrodyellow;
+    text-align: center;
+    color: rgb(208, 252, 208);
+}

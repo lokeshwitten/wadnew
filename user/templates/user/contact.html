@@ -1,0 +1,27 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contact</title>
+    <link href="{% static 'user/contact.css' %}" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="cntfrm">
+        <h1 id="hcn">Contact Us</h1>
+        <p id="gr">Tablo beleive in good relationship with customer , so if you need any help feel free to contact us .</p>
+        <div class="cnbox">
+            <form>
+                <input type="text" id="name" name="Name" placeholder="Name...">
+                <input type="text" id="email" name="Email Id" placeholder="Email Id..">
+                <textarea type="text" id="message" name="Message" placeholder="Message.."></textarea>
+                <input type="submit" id="clk" value="Send Message">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

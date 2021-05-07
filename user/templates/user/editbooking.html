@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit your Reservation</title>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"  crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+
+
+
+</head>
+<body>
+
+<div class="jumbotron ">
+    <div class="container text-center bookTable ">
+        <h1 class="upper-case">Edit Reservation</h1>
+        <p>Enter the correct confirmation code to edit or cancel reservation</p>
+
+    </div><!-- End container -->
+</div>
+
+
+<form action="" class="form-horizontal customerForm">
+
+    <div class="row">
+        <div class="col-lg-3 col-md-3"></div>
+        <div class="form-group  col-md-6 col-lg-6 col-sm-12">
+            <label for="party" class="col-lg-2 control-label">Conirmation Code</label>
+            <div class="col-lg-10">
+                <div class="input-group">
+                    <span class="input-group-addon glyphicon glyphicon glyphicon-asterisk"></span>
+                    <input type="tel" class="form-control" id="code" placeholder="code" required>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3"></div>
+    </div>
+
+    <div class="form-group col-md-6 col-lg-6 col-sm-12">
+        <label for="user-name" class="col-lg-2 control-label">Name</label>
+        <div class="col-lg-10">
+            <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-user"></span>
+                <input type="text" class="form-control" id="user-name" placeholder="Enter you name" required>
+
+            </div>
+
+        </div>
+    </div><!-- End form group -->
+
+
+    <div class="form-group col-md-6 col-lg-6 col-sm-12">
+        <label for="phone" class="col-lg-2 control-label">Contact</label>
+        <div class="col-lg-10">
+            <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-earphone"></span>
+                <input type="tel" class="form-control" pattern='[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}' id="phone" placeholder="Phone Number" required>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-3 col-md-3"></div>
+        <div class="form-group  col-md-6 col-lg-6 col-sm-12">
+            <label for="party" class="col-lg-2 control-label">No of Tables</label>
+            <div class="col-lg-10">
+                <div class="input-group">
+                    <span class="input-group-addon glyphicon glyphicon-hand-right"></span>
+                    <input type="tel" class="form-control" id="party" placeholder="Enter No of Tables" required>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3"></div>
+    </div>
+
+
+
+
+
+    <div class="form-group col-md-6 col-lg-6 col-sm-12">
+        <label for="date" class="col-lg-2 control-label">Date</label>
+        <div class="col-lg-10">
+            <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-hand-right"></span>
+
+                <input type="date" class="form-control" id="date" placeholder="Choose a Date" required>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-6 col-lg-6 col-sm-12">
+        <label for="time" class="col-lg-2 control-label">Time</label>
+        <div class="col-lg-10">
+
+            <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-hand-right"></span>
+                <input type="time" class="form-control" id="time" placeholder="Choose a Time" required>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-3 col-md-3"></div>
+        <div class="form-group  col-md-6 col-lg-6 col-sm-12">
+            <label for="user-message" class="col-lg-2 control-label">Message</label>
+            <div class="col-lg-10">
+                    <textarea name="user-message" id="user-message" class="form-control"
+                              cols="5" rows="10" placeholder="Enter your Special needs"></textarea>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3"></div>
+    </div>
+
+
+
+
+    <div class=" col-lg-12 form-group text-center" >
+
+
+        <!--<button type="button" id="edit" class="btn btn-warning" data-toggle="tooltip" data-placement="right" title="Tooltip on right" data-content="Click to edit an existing reservation">Edit</button>-->
+        <a href="editbooking.html" class="btn btn-warning ">Confirm</a>
+        <a href="#" class="btn btn-warning ">Cancel</a>
+    </div>
+    <hr>
+
+</form>
+
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+body{
+    background-color: rgb(10, 10, 82);
+    margin:0px; 
+}
+.head{
+    background-color:#e52165;
+    position: fixed;
+    width:100%;
+    height:100px;
+    margin:0px;
+    /* margin-top:0px; */
+    overflow: hidden;
+    top:0;
+}
+#ma{
+    margin-left:100px;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .row{
+      background-color: white;
+      width:80%;
+      margin-left:120px;
+      margin-top:150px;
+  }
+  .colm{
+      float:left;
+  }
+  .list{
+      width:25%;
+      height:600px;
+      margin:20px;
+      border:1px solid lightgray;
+      background-color:skyblue;
+  }
+  /* .opt{
+      width:80%;
+      height:100px;
+      margin:10px;
+      margin-left:25px;
+      border:1px solid lightgray;
+      text-align: center;
+      background-color:white;
+  } */
+  .opt a:link{
+    width:80%;
+    height:100px;
+    margin:10px;
+    margin-left:25px;
+    /* border:1px solid lightgray; */
+    text-align: center;
+      text-decoration: none;
+      color:black;
+  }
+  .opt a:hover{
+    width:80%;
+      height:100px;
+      margin:10px;
+      margin-left:25px;
+      border:1px solid lightgray;
+      text-align: center;
+      background-color:white;
+    text-decoration: none;
+    color: green;
+   font-size: medium;
+  }
+  .history{
+    width:65%;
+    margin:20px;
+    /* border:1px solid lightgray; */
+    background-color:white;
+}
+
+.hisdis{
+    width:90%;
+    height:250px;
+    margin:10px;
+    margin-left:25px;
+    border:1px solid lightgray;
+}
+#po{
+    margin:10px;
+    margin-left:25px;
+}
+.rrow:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+.rdis{
+    float: left;
+}
+.rimg{
+    width:100px;
+    height:100px;
+    border:1px solid lightgray;
+    margin:10px;
+}
+.rdes{
+    width:70%;
+    height:100px;
+    /* border:1px solid lightgray; */
+    margin:10px;
+}
+.order{
+    width:90%;
+    height:100px;
+    /* border:1px solid lightgray; */
+    margin:10px;
+}
+#rn{
+    margin:0px;
+}
+#cn{
+    margin:1px;
+}
+#on{
+    margin:0px;
+}
+#vd{
+    margin:1px;
+    color: coral;
+}
+.rw:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+.cl{
+    float: left;
+}
+.cl a:link{
+    text-align: center;
+      text-decoration: none;
+      color:black;
+  }
+  .cl a:hover{
+    
+    text-decoration: none;
+    color:black;
+   
+  }
+.oa{
+    width:100px;
+    height:50px;
+    border:1px solid lightgray;
+    margin-top:0px;
+    text-align: center;
+    color: aliceblue;
+    background-color: brown;
+}
+.pay{
+    width:100px;
+    height:50px;
+    border:1px solid brown;
+    margin-top:0px;
+    margin-left:20px;
+    text-align: center;
+    color: brown;
+}
