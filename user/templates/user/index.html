@@ -33,7 +33,7 @@
                          <a class="o1" href="">Welcome Back {{username}}</a>
                          <a class="o5" href="{% url 'user:logout' %}">Log Out</a>
                          <a class="o5" href="{% url 'user:myorders' %}">My Orders</a>
-                        <a class="o5" href="">Reservations</a>
+                        <a class="o5" href="{% url 'user:myreservations' %}"> My Reservations</a>
                         <a class="o3" href="{% url 'user:test'%}">Reserve a Table</a>
                         <a class="o4" href="{% url 'user:qrcode'%}"><img id="scamg" src="https://img.icons8.com/ios/2x/qr-code--v2.gif" alt=""></a>
                         {%endif%}

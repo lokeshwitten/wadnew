@@ -5,11 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>endpage</title>
+    <title>Endpage</title>
     <link href="{% static 'user/endpage.css' %}" type="text/css" rel="stylesheet" />
 </head>
 <body>
+    
+    {% if flag %}
     <h1 id="tnk">Thank You For Ordering .</h1>
+    {% else %}
+    <h3 id="tnk" style="color: red;">Your Past Order at the restaurant : {{order.restaurant.name}} Dated: {{order.date}}: {{order.time}} </h3>
+
+        
+    {% endif %}
+        
+   
     <div class="rw1">
         <div class="cl cl1">
               <h1 id="os">Order Summary</h1>
@@ -32,6 +41,11 @@
                   <h2>Total Price : {{order.price}}</h2>
               </div>
         </div>
+        
+        {% if flag %}
+            
+        
+            
         <div class="cl cl2">
             <div class="opt">
                 <a href="{% url 'user:view_restaurant' code %}"><h2>Add Items</h2></a>
@@ -62,5 +76,6 @@
             </div>
         </div>
     </div>
+    {% endif %}
 </body>
 </html>

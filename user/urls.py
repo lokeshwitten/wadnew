@@ -23,7 +23,10 @@ urlpatterns = [
     path('ajax/validate_username',views.validate_username,name='validate_username'),
     path('ajax/validate_table_no',views.validate_table_no,name='validate_table_no'),
     path('order/<str:order_no>',views.view_order,name='view_order'),
-    path('/myorders',views.myorders,name='myorders')
+    path('/myorders',views.myorders,name='myorders'),
+    path('/myreservations',views.myreservations,name='myreservations'),
+    path('/reservations/<str:conf_code>',views.view_reservation,name='view_reservation'),
+    path('/pastorders',views.view_past_orders,name='past_orders')
 
 ]
 if settings.DEBUG:

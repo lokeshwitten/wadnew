@@ -218,8 +218,13 @@ def cart(request):
 def view_order(request,order_no):
     order=Order.objects.get(order_no=order_no)
     rest_code=order.restaurant.rest_id
+    
+    if(order.bill_status=='PEND'):
+        flag=True
+    else:
+        flag=False
     return render(request,"user/endpage.html",{
-        "order":order,"code":rest_code
+        "order":order,"code":rest_code,"flag":flag
     })
 
 def myorders(request):
@@ -227,6 +232,23 @@ def myorders(request):
     active_orders=user.orders.filter(bill_status='PEND')
     return render(request,"user/myorders.html",{
         "orders":active_orders
+    })
+def view_past_orders(request):
+    orders=Order.objects.filter(bill_status='PD')
+    return render(request,"user/pastorders.html",{
+        "orders":orders
+    })
+def myreservations(request):
+    user=request.user
+    reservations=user.reservations.all()
+    return render(request,"user/reservations.html",{
+        'reservations':reservations
+    })
+
+def view_reservation(request,conf_code):
+    reservation=Reservations.objects.get(conf_code=conf_code)
+    return render(request,"user/resexpand.html",{
+        "reservation":reservation
     })
 '''AJAX Validation views'''
 def validate_username(request):

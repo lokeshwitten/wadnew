@@ -17,13 +17,13 @@
     <div class="row">
         <div class="colm list">
              <div class="opt">
-                 <a href="{% url 'user:past_orders' %}"><h1>Past Orders</h1></a>
-                 <a href="{% url 'user:index' %}"><h1>Index</h1></a>
+                 <a href="{% url 'user:myorders' %}"><h1>Active  Orders</h1></a>
+                 <a href="{% url 'user:past_orders' %}"><h1>Index</h1></a>
              </div>            
         </div>
 
         <div class="colm history">
-            <h1 id="po">Active Orders</h1>
+            <h1 id="po">Past Orders</h1>
             {% for order  in orders %}
               
             

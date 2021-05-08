@@ -89,14 +89,14 @@
             
 
         </div>
-        
+        {% if username %}
         <h1 id='cartmsg'>CART EMPTY</h1>
         <ul id='cart'>
     
         </ul>
         
         
-        {% if username %}
+       
         <form action="{% url 'user:view_restaurant' restaurant.rest_id  %}" method="post">
             {% csrf_token %}
             <input type="hidden" value='' name='orderdata' id='orderdata'>

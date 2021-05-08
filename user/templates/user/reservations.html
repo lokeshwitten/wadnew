@@ -5,35 +5,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>myorders</title>
+    <title>My Reservations</title>
     <link href="{% static 'user/myorders.css' %}" type="text/css" rel="stylesheet" >
 </head>
 <body>
     <div class="head">
-        <h1 id="ma">MY ACCOUNT</h1>
+        <h1 id="ma">MY Reservations</h1>
         
     </div>
 
     <div class="row">
         <div class="colm list">
              <div class="opt">
-                 <a href="{% url 'user:past_orders' %}"><h1>Past Orders</h1></a>
-                 <a href="{% url 'user:index' %}"><h1>Index</h1></a>
+                 <a href="#orders"><h1>Past Reservations</h1></a>
              </div>            
         </div>
 
         <div class="colm history">
-            <h1 id="po">Active Orders</h1>
-            {% for order  in orders %}
+            <h1 id="po">Active Reservations</h1>
+            {% for reservation  in reservations %}
               
             
              <div class="hisdis">
                  <div class="rrow">
                  <img class="rdis rimg" src="https://image.shutterstock.com/image-vector/shopping-cart-check-mark-icon-260nw-1708233319.jpg" alt="">
                  <div class="rdis rdes">
-                     <p id="rn">Restaurant name :{{order.restaurant.name}}</p>
-                     <p id="cn">City name : {{order.restaurant.address.city}}</p>
-                     <p id="on">Order no : {{order.order_no}} </p>
+                     <p id="rn">Restaurant name :{{reservation.restaurant.name}}</p>
+                     <p id="cn">City name : {{reservation.restaurant.address.city}}</p>
+                     <p id="on">Confirmation Code  : {{reservation.conf_code}} </p>
                      <p id="vd">VIEW DETAILS</p>
                  </div>
                  </div>
@@ -41,7 +40,7 @@
                     
                     <div class="rw">
                         <div class="cl oa">
-                            <a href="{% url 'user:view_order' order.order_no %}"><p>Go to the Order</p></a>
+                            <a href="{% url 'user:view_reservation' reservation.conf_code %}"><p>Go to the Reservation</p></a>
                         </div>
                     </div>
                  </div>
