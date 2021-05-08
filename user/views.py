@@ -20,7 +20,7 @@ def index(request):
             "username":username
         })
     else: #Ask the user to login
-        return HttpResponseRedirect(reverse('user:login'))
+        return render(request,"user/index.html")
 
 def signup(request):
     if(request.method=="POST"):
@@ -124,7 +124,7 @@ def confirm_res(request):
     
     return HttpResponseRedirect(reverse('user:test'))   
     
-@login_required(redirect_field_name='/usertest1',login_url='/user/login')
+#@login_required(redirect_field_name='/usertest1',login_url='/user/login')
 def view_restaurant(request,rest_id):
     if request.method=="POST":
         orderdata=request.POST['orderdata']
@@ -133,7 +133,7 @@ def view_restaurant(request,rest_id):
     restaurant=Restaurant.objects.get(rest_id=rest_id)
     request.session['rest']=rest_id
     return render(request,"user/menu.html",{
-        "restaurant":restaurant,"dishes":restaurant.dishes.all()
+        "restaurant":restaurant,"dishes":restaurant.dishes.all(),"username":request.user.username
     })
 def qrcode(request):
     data=readqr()
@@ -262,7 +262,10 @@ def validate_table_no(request):
         return JsonResponse(data)
     
 def rest(request):
-    return render(request,"user/rest.html")
+    restaurants=Restaurant.objects.all()
+    return render(request,"user/rest.html",{
+        "restaurants":restaurants
+    })
     
 
  

@@ -70,6 +70,8 @@
                             <p>50% off | use xxxxx</p>
                         </div>
                     </div>
+                    
+                    {% if username %}
                     <form>
 
                         <div class="value-button" id="decrease{{dish.pk}}" onclick="decrease('q{{dish.pk}}')" value="Decrease Value">-</div>
@@ -77,6 +79,10 @@
                         <div class="value-button" id="increase{{dish.pk}}" onclick="increase('q{{dish.pk}}')" value="Increase Value">+</div>
                         
                       </form>
+                        
+                    {% endif %}
+                        
+                   
                 </div>
             </div>
             {%endfor%}
@@ -90,11 +96,16 @@
         </ul>
         
         
+        {% if username %}
         <form action="{% url 'user:view_restaurant' restaurant.rest_id  %}" method="post">
             {% csrf_token %}
             <input type="hidden" value='' name='orderdata' id='orderdata'>
             <input type="submit"  value='Proceed to Checkout' style="position: absolute; right: 7.5%; bottom: 0;">
           </form>
+            
+        {% endif %}
+            
+        
     </div>
 
 <script>

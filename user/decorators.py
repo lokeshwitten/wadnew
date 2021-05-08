@@ -1,6 +1,7 @@
 from hoteladmin.models import *
 import qrcode
 import cv2
+from datetime import datetime,time,date,timedelta
 
 def get_code(Restaurant):
     city=Restaurant.address.city
@@ -207,47 +208,36 @@ def build_previous_order(Order):
             
 
 '''Functions for reservations'''
+def get_time(time,offset):
+    x=datetime.combine(date.today(),time)
+    y=timedelta(seconds=offset)
+    z=x+y
+    return z.time()
 
 #Return the tables available 
-def tables_avail(Restaurant):
-    avail_capacity=Restaurant.capacity
-    reservations=Restaurant.reservations.all()
-    if reservations is None:
-        return avail_capacity
-    else: 
-        for reservation in reservations:
-            avail_capacity-=reservation.tables
-        return avail_capacity
-def set_tableno(Reservation):
-    restaurant=Reservation.restaurant
-    reservations=restaurant.reservations.all()
+def get_avail_tables(Restaurant,date,time):
     list=[]
-    populate(list,restaurant.capacity)
-    #If this is the first reservation
-    if(restaurant.reservations.count()==1):
-        table_no=extract_min(list,int(Reservation.tables))
-        table_no= [str(element) for element in table_no]
-        string=",".join(table_no)
-        string+=','
-        Reservation.table_no=string
-        Reservation.save()
+    string=''
+    populate(list,Restaurant.capacity)
+    list=[str(element) for element in list]
+    begin=get_time(time,-1200)
+    end=get_time(time,1200)
+    reservations=Reservations.objects.filter(restaurant=Restaurant,date=date,time__range=(begin,end))
+    if reservations.count() == 0:
+        return list
     else:
-        avail_tables=[]
-        string=''
         for reservation in reservations:
             string+=reservation.table_no
         string=string[:len(string)-1]
-        tables_occupied=string.split(",")
-        tables_occupied=[int(element) for element in tables_occupied ]
-        tables_avail=Diff(tables_occupied,list)
-        table_no=extract_min(tables_avail,int(Reservation.tables))
-        table_no= [str(element) for element in table_no]
-        table_no=",".join(table_no)
-        table_no+=','
-        Reservation.table_no=table_no
-        Reservation.save()
-
-
+        taken_tables=string.split(",")
+        avail_tables=Diff(taken_tables,list)
+        return avail_tables
+            
+def set_tableno(Reservation,time):
+    max_capacity=Reservation.restaurant.capacity
+    
+    
+    
 
         
         
