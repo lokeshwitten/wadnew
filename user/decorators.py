@@ -68,6 +68,8 @@ def populate(list,no):
     for i in range(1,no+1):
         list.append(i)
 def Diff(li1, li2):
+    if(li1 == li2):
+        return []
     li3=li2
     for i in li1:
         li3.remove(i)
@@ -208,6 +210,7 @@ def build_previous_order(Order):
             
 
 '''Functions for reservations'''
+
 def get_time(time,offset):
     x=datetime.combine(date.today(),time)
     y=timedelta(seconds=offset)
@@ -219,20 +222,22 @@ def get_avail_tables(restaurant,date,time):
     list=[]
     string=''
     populate(list,int(restaurant.capacity))
-    list=[str(element) for element in list]
+    
     begin=get_time(time,-1200)
     end=get_time(time,1200)
     reservations=Reservations.objects.filter(restaurant=restaurant,date=date,time__range=(begin,end))
     if reservations.count() == 0:
+    
         return list
     else:
         for reservation in reservations:
             string+=reservation.table_no
         string=string[:len(string)-1]
-        if string=='': #Empty string -first reservation in the time slot
+        if string =='': #Empty string -first reservation in the time slot
             return list
         else:
             taken_tables=string.split(",")
+            taken_tables=[int(element) for element in taken_tables]
             avail_tables=Diff(taken_tables,list)
             return avail_tables
             
@@ -240,6 +245,7 @@ def set_tableno(reservation):
     restaurant=reservation.restaurant
     avail_tables=get_avail_tables(restaurant,reservation.date,reservation.time)
     table_no=extract_min(avail_tables,int(reservation.tables))
+    table_no=[str(element) for element in table_no]
     table_no=",".join(table_no)
     table_no+=','
     reservation.table_no=table_no
@@ -249,7 +255,7 @@ def get_capacity(restaurant,date,time):
     list=[]
     string=''
     populate(list,int(restaurant.capacity))
-    list=[str(element) for element in list]
+    
     begin=get_time(time,-1200)
     end=get_time(time,1200)
     reservations=Reservations.objects.filter(restaurant=restaurant,date=date,time__range=(begin,end))
@@ -260,8 +266,12 @@ def get_capacity(restaurant,date,time):
             string+=reservation.table_no
         string=string[:len(string)-1]
         taken_tables=string.split(",")
-        avail_tables=Diff(taken_tables,list)
-        return len(avail_tables)
+        taken_tables=[int(element) for element in taken_tables]
+        if len(taken_tables)>len(list):
+            return 0
+        else:
+            avail_tables=Diff(taken_tables,list)
+            return len(avail_tables)
    
     
     

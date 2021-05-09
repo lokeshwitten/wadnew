@@ -14,6 +14,10 @@ from wad.settings import BASE_DIR
 
 def index(request):
     request.session.set_expiry(0)
+    user=request.user
+    if  user.groups.filter(name='HotelAdmin').exists():
+        return HttpResponseRedirect(reverse('user:login'))
+        
     if request.user.is_authenticated:
         username=request.user.username.capitalize()
         return render(request,"user/index.html",{
@@ -24,10 +28,12 @@ def index(request):
 
 def signup(request):
     if(request.method=="POST"):
+        
         #Error messages
         usernameexists="Username already exists.Choose a new username"
         userexists="Account already exists.Please sign in to continue"
         passerror="The passwords don't match.Please enter again"
+       
         #POST data
         username=request.POST['username']
         password=request.POST.get('password')
@@ -39,6 +45,8 @@ def signup(request):
             return render(request,"user/signup.html",{
                 "message":passerror
             })
+            #Checking if the user is a hoteladmin:
+            
         
         #Checking if the username or the user already exists
         allusers=User.objects.all()
@@ -65,10 +73,15 @@ def view_login(request):
     if(request.method=="POST"):
         errormessage="Incorrect crendetials or the account doesnt exist"
         passmismatch="Passwords don't match.Please enter again."
+        permsenied='Permission Denied'
         username=request.POST['username']
         password=request.POST['password']
        
         user=authenticate(request,username=username,password=password)
+        if user.groups.filter(name='HotelAdmin').exists():
+            return render(request,"user/login.html",{
+                "message":permsenied
+            })
         if user is not None:    
             login(request,user)
             #Redirect to index view

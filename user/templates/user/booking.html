@@ -20,7 +20,7 @@
         <div class="container text-center bookTable ">
             <h1 class="upper-case">Book Your Table</h1>
             <h2>Restaurant : {{name}}</h2>
-            <h2>Tables available  in the choosen Time slot: {{no}}</h2>
+            <h2 id='no_tables'>Tables available  in the choosen Time slot: {{no}}</h2>
             <h2 id='msg' style="color: red;"></h2>
 
 
@@ -122,11 +122,25 @@
 
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
-    var capacity= document.getElementById('capacity').value
+    $(document).ready(function () {
+        check_for_zero();
+    });
+    function check_for_zero(){
+        var cp=document.getElementById('capacity').value
+        if (Number(cp) === 0)
+        {
+            document.getElementById('msg').innerHTML='Sorry. This time slot is completely booked.'
+            document.getElementById('submit').disabled=true;
+            document.getElementById('no_tables').innerHTML=''
+        }
+      
+    }
+    
     $("#tables").change(
         function(){
             var tables= $(this).val()
             console.log(tables)
+            
             if(Number(tables) > Number(capacity)){
             document.getElementById('msg').innerHTML='Not enough tables are present to complete the reservation'
             document.getElementById('submit').disabled=true;

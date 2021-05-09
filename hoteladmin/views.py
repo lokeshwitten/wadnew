@@ -13,6 +13,9 @@ import json
 # Create your views here.
 
 def index(request):
+    user=request.user
+    if not user.groups.filter(name='HotelAdmin').exists():
+        return HttpResponseRedirect(reverse('hoteladmin:login'))
     if request.user.is_authenticated:
         return render(request,"hoteladmin/index.html",{
             "user":request.user.username.capitalize() } )
@@ -140,8 +143,29 @@ def view_reservations(request):
     return render(request,"hoteladmin/reservations.html",{
         "reservations":reservations
     })
+    
+def view_profile(request):
+    user=request.user
+    return render(request,"hoteladmin/profile.html",{
+        "user":user
+    })
+def edit_profile(request):
+    pass
+def downloadqr(request):
+    pass
+def menu(request):
+    pass
+def edit_dish(request,pk):
+    pass
 
 '''AJAX Views'''
+def validate_username(request):
+    username=request.GET['username']
+    data = {
+        'is_taken': User.objects.filter(username__iexact=username).exists()
+    }
+    return JsonResponse(data)
+    
 def change_payment_status(request):
         id1=request.GET.get('rest_id',None)
         order=Order.objects.get(order_no=id1)

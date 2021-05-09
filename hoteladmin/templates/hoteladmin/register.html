@@ -164,7 +164,7 @@ body {
 			</select>
 		</div>
 		<div class="form-group">
-        	<input type="User name" class="form-control" name="user_name" placeholder="User name" required="required">
+        	<input type="User name" id="username" class="form-control" name="user_name" placeholder="User name" required="required">
         </div>
 		
 		<div class="form-group">
@@ -179,5 +179,31 @@ body {
     </form>
 	<div class="text-center">Already registered? <a href="{% url 'hoteladmin:login' %}">Sign in</a></div>
 </div>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+	$("#username").change(
+	function (){
+		var username= $(this).val();
+		$.ajax({
+			url : '{% url "hoteladmin:validate_username" %}',
+			data: {
+				"username":username
+			},
+			dataType: 'json',
+			success : function(data){
+				if(data.is_taken){
+					alert('A user with this username already exists')
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+                console.log(JSON.stringify(jqXHR));
+                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+            }
+		})
+
+	}
+)
+
+</script>
 </body>
 </html>
