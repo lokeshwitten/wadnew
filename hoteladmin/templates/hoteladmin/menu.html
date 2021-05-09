@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
-    <link href="{% static 'user/menu.css' %}" type="text/css" rel="stylesheet" />
-    <link href="{% static 'user/styles.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'hoteladmin/menu.css' %}" type="text/css" rel="stylesheet" />
+    <link href="{% static 'hoteladmin/styles.css' %}" type="text/css" rel="stylesheet">
     <style>
         li { display: list-item }
     </style>
@@ -57,53 +57,34 @@
             <div class="disr">
                 <div class="disrw">
                     <div class="disclm fdimg">
-                        <img id="img1" src="{% static 'user/media/pbs.jpg' %}"
+                        <img id="img1" src="{% static 'hoteladmin/pbs.jpg' %}"
                             alt="">
                         
 
                     </div>
                     <div class="disclm disdesc">
                         
-                        <p id="laq{{dish.pk}}">{{dish.name}}</p>
+                        <p ><a href="{%url 'hoteladmin:edit_dish' dish.pk %}">{{dish.name}}</a></p>
                         <p id="dishpriceq{{dish.pk}}">{{dish.price}}</p>
                         <div class="coupon">
                             <p>50% off | use xxxxx</p>
                         </div>
                     </div>
-                    
-                    {% if username %}
-                    <form>
-
-                        <div class="value-button" id="decrease{{dish.pk}}" onclick="decrease('q{{dish.pk}}')" value="Decrease Value">-</div>
-                        <input type="number" id="q{{dish.pk}}" value="0" name='quantity' hidden>
-                        <div class="value-button" id="increase{{dish.pk}}" onclick="increase('q{{dish.pk}}')" value="Increase Value">+</div>
-                        
-                      </form>
-                        
-                    {% endif %}
+                   
                         
                    
                 </div>
             </div>
             {%endfor%}
+            <a href="{% url 'hoteladmin:add_dish'%}">Add Dish</a>
             
 
         </div>
-        {% if username %}
-        <h1 id='cartmsg'>CART EMPTY</h1>
-        <ul id='cart'>
-    
-        </ul>
+       
         
         
        
-        <form action="{% url 'user:view_restaurant' restaurant.rest_id  %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" value='' name='orderdata' id='orderdata'>
-            <input type="submit"  value='Proceed to Checkout' style="position: absolute; right: 7.5%; bottom: 0;">
-          </form>
-            
-        {% endif %}
+        
             
         
     </div>

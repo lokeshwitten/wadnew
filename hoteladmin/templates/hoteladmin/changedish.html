@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>changedish</title>
+    <link href="{% static 'hoteladmin/changedish.css' %}" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <div class="hd">
+        <h1>Change Dish</h1>
+    </div>
+   
+    <div class="cngdsh">
+		<form method="post" action="{% url 'hoteladmin:edit_dish' pk %}">
+          <div class="nm">
+            <label class="container" id="lbl">Veg
+              <input type="checkbox" id="cbx"  name='veg' value={{dish.veg}}>
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <div class="nm">
+		   <div>
+           <label for="Name" id="lbl">Name</label>
+            <input type="text" id="Name" class="box" name="name" placeholder="" value={{dish.name}}>
+           </div>
+		   
+          </div>
+          <div class="nm">
+            
+          <div class="nm">
+		   <div><label for="Price" id="lbl">Price</label>
+		    <input type="text" id="Price" class="box" name="price" placeholder="" value={{dish.price}}>
+           </div>
+          </div>
+          <div class="nm">
+           <div>
+            <div>
+                <label for="Category" id="lbl">Category</label>
+                <select id="Category" class="box" name="category" value={{dish.category}}>
+                    <option value="NIN">North Indian</option>
+                    <option value="SIN ">South Indian </option>
+                    <option value="CHI">Chinese</option>
+                    <option value="IT">Italian</option>
+                    <option value="SD">Side</option>
+                    <option value="KR">Korean</option>
+                    <option value="DES">Dessert</option>
+                    <option value="BEV">Beverages</option>
+                    <option value="SOU">Soup</option>
+                    <option value="SAL">Salad</option>
+                  </select>
+            </div>
+		    
+           </div>
+          </div>
+          <div class="nm">
+            <div><label for="Availability" id="lbl">Availability</label>
+             <select id="Availability" class="box" name="avail" value={{dish.avail}}>
+              <option value="">Yes</option>
+              <option value="">No</option>
+             
+            </select>
+            </div>
+           </div>
+           
+           <div class="nm">
+            <div><label for="Time" id="lbl">Time</label>
+             <select id="Time" class="box" name="Time">
+              <option value="BR">Breakfast</option>
+              <option value="LN">Lunch</option>
+              <option value="DI">Dinner</option>
+              
+            </select>
+            </div>
+           </div>
+           <div class="nm">
+            <div>
+              <label for="AvgTime" id="lbl">AvgTime</label>
+             <input type="text" id="AvgTime" class="box" name="avg_time" placeholder="" value={{dish.avg_time}}>
+            </div>
+           </div>
+        <input type="submit" id="edit" value="Edit">
+		  <input type="submit" id="dlt" value="Delete">
+		</form>
+	  </div>
+</body>
+</html>

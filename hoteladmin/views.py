@@ -184,9 +184,30 @@ def view_feedback(request):
 def menu(request):
     restaurant=request.user.restaurant
     dishes=restaurant.dishes.all()
+    return render(request,"hoteladmin/menu.html",{
+        "restaurant":restaurant,"dishes":dishes
+    })
 def edit_dish(request,pk):
-    pass
-
+    dish=Dish.objects.get(pk=pk)
+    return render(request,"hoteladmin/changedish.html",{
+        "pk":pk,"dish":dish
+    })
+def add_dish(request):
+    if request.method=="POST":
+        restaurant=request.user.restaurant
+        name=request.POST['name']
+        price=request.POST['price']
+        veg=request.POST['veg']
+        category=request.POST['category']
+        avail=request.POST['avail']
+        if veg=='True':
+            veg=True
+        dish=Dish.objects.create(name=name,price=price,veg=veg,category=category,avail=avail)
+        if dish is not None:
+            restaurant.dishes.add(dish)
+            restaurant.save()
+            return HttpResponseRedirect(reverse('hoteladmin:menu'))
+    return render(request,"hoteladmin/adddish.html")
 '''AJAX Views'''
 def validate_username(request):
     username=request.GET['username']

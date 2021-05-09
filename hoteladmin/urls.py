@@ -14,6 +14,7 @@ urlpatterns = [
     path('/viewprofile',views.view_profile,name='view_profile'),
     path('/view_feedback',views.view_feedback,name='view_feedback'),
     path('/menu',views.menu,name='menu'),
+    path('/adddish',views.add_dish,name='add_dish'),
     path('/changedish/<int:pk>',views.edit_dish,name='edit_dish'),
     path('/ajax_validate_username',views.validate_username,name='validate_username'),
     path('ajax/change_waiter_alert',views.change_waiter_alert,name='change_waiter_alert'),
