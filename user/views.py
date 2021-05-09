@@ -96,6 +96,7 @@ def view_login(request):
 def contact(request):
     return render(request,"user/contact.html")
 
+#For reserving a table based on time,date and restaurant entered
 def booking(request,):
     if request.method=="POST":
         request.session['rests']=request.POST['rest']
@@ -168,7 +169,7 @@ def qrcode(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('user:login'))
-#Order Confirmation page
+#Order Confirmation page view based on the items ordered
 def order_conf(request):
     
     if request.method=="POST":
