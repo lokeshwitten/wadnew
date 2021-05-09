@@ -285,6 +285,27 @@ def rest(request):
         "restaurants":restaurants
     })   
     
+#Feedback form
+
+def feedback(request,order_no):
+    if request.method =='POST':
+        food_rating=request.POST['rate']
+        service_rating=request.POST['rate2']
+        app_rating=request.POST['rate3']
+        app_message=request.POST['app_message']
+        service_message=request.POST['service_message']
+        food_message=request.POST['food_message']
+        order=Order.objects.get(order_no=order_no)
+        feedback=Feedback.objects.create(food_message=food_message,food_rating=food_rating,app_message=app_message,app_rating=app_rating,
+                                         service_message=service_message,service_rating=service_rating,order=order)
+        if feedback is not None:
+            return HttpResponseRedirect(reverse('user:feedback_success'))
+        else:
+            return HttpResponse('FeedBack Cant be sent')
+    return render(request,"user/feedback.html",{"order_no":order_no})
+
+def feedback_success(request):
+    return render(request,"user/feedback_success.html")
     
     
 '''AJAX Validation views'''

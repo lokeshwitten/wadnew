@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link href="{% static 'user/menu.css' %}" type="text/css" rel="stylesheet" />
+    <link href="{% static 'user/styles.css' %}" type="text/css" rel="stylesheet">
+    <style>
+        li { display: list-item }
+    </style>
+</head>
+
+<body>
+    <div class="head">
+        <div class="hd logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2p8Et5VWI_A0dZ2kvxfb0kZS6nGqK5pWvBQ&usqp=CAU"
+                alt="">
+        </div>
+        <div class="hd hdc2">
+            <h1 id="logoname">{{restaurant.name}} </h1>
+            <p id="Rinfo">{{restaurant.cuisine}}</p>
+            <p id="Rinfo">{{restaurant.address.street}}</p>
+            <div class="rr1">
+                <div class="rc1 rating">
+                    <p><img id="rimg" src="https://img.icons8.com/small/2x/filled-star.png" alt="">3.5</p>
+                    <p id="sm">XXX+ Ratings</p>
+                </div>
+                
+            </div>
+        </div>
+        <div class="hd offs">
+            <h1>OFFER</h1>
+        </div>
+    </div>
+    <!-- for dish list -->
+    <div class="row">
+        <div class="colm dislst">
+            <div class="disl"><a href="#recm">Reccomended</a></div>
+            <div class="disl"><a href="#dv1">Thali and Platter</a></div>
+            <div class="disl"><a href="#dv2">South Indian Food</a></div>
+            <div class="disl"><a href="#dv3">Pizzas</a></div>
+            <div class="disl"><a href="#dv4">Burger</a></div>
+            <div class="disl"><a href="#dv5">Combo</a></div>
+            <div class="disl"><a href="#dv6">Tea/Coffee</a></div>
+        </div>
+        
+        <div class="colm dish">
+            <div class="disrhd">
+                <h1 id="recm">Reccomended</h1>
+                <p>2 items</p>
+            </div>
+            {% for dish in dishes %}
+            <div class="disr">
+                <div class="disrw">
+                    <div class="disclm fdimg">
+                        <img id="img1" src="{% static 'user/media/pbs.jpg' %}"
+                            alt="">
+                        
+
+                    </div>
+                    <div class="disclm disdesc">
+                        
+                        <p id="laq{{dish.pk}}">{{dish.name}}</p>
+                        <p id="dishpriceq{{dish.pk}}">{{dish.price}}</p>
+                        <div class="coupon">
+                            <p>50% off | use xxxxx</p>
+                        </div>
+                    </div>
+                    
+                    {% if username %}
+                    <form>
+
+                        <div class="value-button" id="decrease{{dish.pk}}" onclick="decrease('q{{dish.pk}}')" value="Decrease Value">-</div>
+                        <input type="number" id="q{{dish.pk}}" value="0" name='quantity' hidden>
+                        <div class="value-button" id="increase{{dish.pk}}" onclick="increase('q{{dish.pk}}')" value="Increase Value">+</div>
+                        
+                      </form>
+                        
+                    {% endif %}
+                        
+                   
+                </div>
+            </div>
+            {%endfor%}
+            
+
+        </div>
+        {% if username %}
+        <h1 id='cartmsg'>CART EMPTY</h1>
+        <ul id='cart'>
+    
+        </ul>
+        
+        
+       
+        <form action="{% url 'user:view_restaurant' restaurant.rest_id  %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" value='' name='orderdata' id='orderdata'>
+            <input type="submit"  value='Proceed to Checkout' style="position: absolute; right: 7.5%; bottom: 0;">
+          </form>
+            
+        {% endif %}
+            
+        
+    </div>
+
+
+
+
+    </body>
+</html>
+            

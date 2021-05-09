@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Feedback</title>
+</head>
+<body>
+    <h1 style="text-align: center;">User Feedback Page</h1>
+    {% for feedback  in feedbacks %}
+<p>
+    <ul>
+        <li>Name : {{feedback.order.user.username}} </li>
+        <li>Email ID : {{feedback.order.user.email}} </li>
+        <li>App Rating : {{feedback.app_rating}} Stars</li>
+        <li>Service Rating: {{feedback.service_rating}} Stars</li>
+        <li> Food Rating : {{feedback.food_rating}} Stars</li>
+        <li>About Food : {{feedback.food_message}}</li>
+        <li>About Application : {{feedback.app_message}}</li>
+        <li>About Service : {{feedback.service_message}}</li>
+        
+    </ul>
+</p>
+      
+    {% endfor %}
+    
+</body>
+</html>

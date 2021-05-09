@@ -56,6 +56,16 @@ class Item(models.Model):
         return f"{self.dish}-{self.quantity}"
     def get_price(self):
         return int(self.dish.price*self.quantity)
+    
+class Feedback(models.Model):
+    app_rating=models.IntegerField(default=3)
+    food_rating=models.IntegerField(default=3)
+    service_rating=models.IntegerField(default=3)
+    app_message=models.CharField(max_length=1000,default='')
+    food_message=models.CharField(max_length=1000,default='')
+    service_message=models.CharField(max_length=1000,default='')
+    order=models.ForeignKey('Order',related_name='feedback',on_delete=models.CASCADE,default=None)
+    
 class Order(models.Model):
     PENDING='PEND'
     CONFIRM='CON'
@@ -75,6 +85,7 @@ class Order(models.Model):
     avg_time=models.IntegerField(default=0)
     table_no=models.IntegerField(default=0)
     price=models.IntegerField(default=0)
+    
 
     def __str__(self):
         return f"{self.order_no}  "

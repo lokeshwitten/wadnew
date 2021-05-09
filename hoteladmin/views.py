@@ -167,10 +167,23 @@ def edit_profile(request):
     return render(request,"hoteladmin/editprofile.html",{
         "user":user
     })
-def downloadqr(request):
-    pass
+def view_feedback(request):
+    feedbacks=[]
+    restaurant=request.user.restaurant
+    orders=restaurant.orders.all()
+    for order in orders:
+        try:
+            feedback=Feedback.objects.get(order=order)
+            feedbacks.append(feedback)
+        except:
+            pass
+        
+    return render(request,"hoteladmin/feedback.html",{
+        "feedbacks":feedbacks
+    })
 def menu(request):
-    pass
+    restaurant=request.user.restaurant
+    dishes=restaurant.dishes.all()
 def edit_dish(request,pk):
     pass
 

@@ -78,6 +78,15 @@
         </div>
     </div>
     {% endif %}
+
+    
+    {% if not flag %}
+    <div class="p1">
+        <a href="{% url 'user:feedback' order.order_no %}"><h2>Feedback</h2></a>
+    </div>
+        
+    {% endif %}
+        
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script>
         function send_ajax_request_waiter(order_no){

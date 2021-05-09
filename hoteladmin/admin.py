@@ -10,4 +10,5 @@ admin.site.register(address)
 admin.site.register(Global)
 admin.site.register(Reservations)
 admin.site.register(Item)
+admin.site.register(Feedback)
 

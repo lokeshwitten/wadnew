@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>feedback</title>
+    <link href="{% static 'user/feedback.css' %}" type="text/css" rel="stylesheet" />
+</head>
+<body>
+
+  
+<form class="form" method="POST" action="{% url 'user:feedback' order_no %}">
+  {% csrf_token %}
+    <h2>Your Feedback</h2>
+    
+    <p type="We would like to hear from you:">
+    
+      
+    <textarea name="food_message" placeholder="how was the food ?"cols="60" rows="5" required></textarea>
+    <textarea name="service_message" placeholder="how was the service?"cols="60" rows="5" required></textarea>
+    <textarea name="app_message" placeholder="how was the app experience?"cols="60" rows="5" required></textarea>
+    
+    
+    
+    </p>
+    
+      
+      
+      <div class="rate";>
+        <input type="radio" id="star5" name="rate" value="5" />
+        <label for="star5" title="text">5 stars</label>
+        <input type="radio" id="star4" name="rate" value="4" />
+        <label for="star4" title="text">4 stars</label>
+        <input type="radio" id="star3" name="rate" value="3" />
+        <label for="star3" title="text">3 stars</label>
+        <input type="radio" id="star2" name="rate" value="2" />
+        <label for="star2" title="text">2 stars</label>
+        <input type="radio" id="star1" name="rate" value="1" />
+        <label for="star1" title="text">1 star</label>
+        <h4>Food Rating</h4>
+      </div>
+
+      <div class="rate2";>
+        <input type="radio" id="star5two" name="rate2" value="5" />
+        <label for="star5two" title="text">5 stars</label>
+        <input type="radio" id="star4two" name="rate2" value="4" />
+        <label for="star4two" title="text">4 stars</label>
+        <input type="radio" id="star3two" name="rate2" value="3" />
+        <label for="star3two" title="text">3 stars</label>
+        <input type="radio" id="star2two" name="rate2" value="2" />
+        <label for="star2two" title="text">2 stars</label>
+        <input type="radio" id="star1two" name="rate2" value="1" />
+        <label for="star1two" title="text">1 star</label>
+        <h4>Service Rating</h4>
+      </div>
+
+      <div class="rate3";>
+      <input type="radio" id="star5thr" name="rate3" value="5" />
+        <label for="star5thr" title="text">5 stars</label>
+        <input type="radio" id="star4thr" name="rate3" value="4" />
+        <label for="star4thr" title="text">4 stars</label>
+        <input type="radio" id="star3thr" name="rate3" value="3" />
+        <label for="star3thr" title="text">3 stars</label>
+        <input type="radio" id="star2thr" name="rate3" value="2" />
+        <label for="star2thr" title="text">2 stars</label>
+        <input type="radio" id="star1thr" name="rate3" value="1" />
+        <label for="star1thr" title="text">1 star</label>
+        <h4>Application Rating</h4>
+      </div>
+      
+    </body>
+
+    <button>Send Message</button>
+   
+  </form>
+  
+</html>
