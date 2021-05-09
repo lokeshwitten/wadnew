@@ -22,7 +22,7 @@
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
     <link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
     
-
+    <meta http-equiv="refresh" content="20">
 </head>
 <body><div class="tab-content">
                     <div class="tab-pane fade active in" id="tab1">
@@ -42,6 +42,8 @@
                                 <th>Customer Name</th>
                                 <th>Time of Reservation</th>
                                 <th>Date of Reservation</th>
+                                <th>No of Tables Reserved</th>
+    
                                 <th>Delete Reservation</th>
                                 
             
@@ -63,7 +65,8 @@
                                 
                                 <td>{{reservation.time}}</td>
                                 <td>{{reservation.date}}</td>
-                                <td> <button id="{{reservation.conf_code}} " , onclick="send_ajax_request('{{order.order_no}}')"> Delete Reservation </button></td>
+                                <td>{{reservation.tables}}</td>
+                                <td> <button id="{{reservation.conf_code}} " , onclick="ajax_delete_reservation('{{reservation.conf_code}}')"> Delete Reservation </button></td>
 
                             </tr>
                             {% endfor %}
@@ -79,7 +82,28 @@ green-bill paided
                             </table>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
-    
+    function ajax_delete_reservation(id){
+        $.ajax({
+            url: '{% url "hoteladmin:delete_reservation" %}',
+            method: 'GET',
+            type:'json',
+            data : {
+                'conf_code':id
+            },
+            success: function(data){
+                if(data.flag){
+                    conf_code=data.conf_code
+                    alert('The reservation ' + conf_code +' has been deleted')
+                }
+
+            }
+        })
+
+    }
+    function autoRefresh() {
+        window.location = window.location.href;
+    }
+    setInterval('autoRefresh()', 10000);
 </script>
 </body>
 </html>

@@ -150,6 +150,19 @@ def view_profile(request):
         "user":user
     })
 def edit_profile(request):
+    if request.method=='POST':
+        user=request.user
+        rest_name=request.POST['first_name']
+        email=request.POST['email']
+        contact=request.POST['contact']
+        user.email=email
+        user.save()
+        restaurant=user.restaurant
+        restaurant.name=rest_name
+        restaurant.contact=contact
+        restaurant.save()
+        return HttpResponseRedirect(reverse('hoteladmin:view_profile'))
+        
     user=request.user
     return render(request,"hoteladmin/editprofile.html",{
         "user":user
@@ -191,4 +204,19 @@ def change_waiter_alert(request):
         table_no=order.table_no
         data={"flag":flag,"table_no":table_no}
         return JsonResponse(data)
+def ajax_delete_reservation(request):
+    conf_code=request.GET.get('conf_code',None)
+    if conf_code is None:
+        data={"flag":False}
+        return JsonResponse(data)
+    else:
+        try:
+            reservation=Reservations.objects.get(conf_code=conf_code)
+            reservation.delete()
+            data={"flag":True,"conf_code":conf_code}
+            return JsonResponse(data)
+        except:
+              data={"flag":False}
+              return JsonResponse(data)
+            
     

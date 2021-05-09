@@ -18,6 +18,9 @@
             margin-left: 50px;
             margin-top: 0px;
         }
+		#link,#link1{
+			color: black;
+		}
     </style>
 </head>
 <body>
@@ -49,7 +52,8 @@
                                 <p>
                                     Contact:{{user.restaurant.contact}}
                                 </p>
-									        
+								<button name="update" class="btn btn-primary" id="update"><a id ="link" href="{% url 'hoteladmin:edit_profile' %}">Update Details</a> </button>
+								<button name="update1" class="btn btn-primary" id="update"><a id ="link1" href="{% url 'hoteladmin:index' %}">Back To Index</a> </button>
 	
 
 </body>

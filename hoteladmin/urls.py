@@ -16,6 +16,7 @@ urlpatterns = [
     path('/menu',views.menu,name='menu'),
     path('/changedish/<int:pk>',views.edit_dish,name='edit_dish'),
     path('/ajax_validate_username',views.validate_username,name='validate_username'),
-    path('ajax/change_waiter_alert',views.change_waiter_alert,name='change_waiter_alert')
+    path('ajax/change_waiter_alert',views.change_waiter_alert,name='change_waiter_alert'),
+    path('ajax_delete_reservation',views.ajax_delete_reservation,name='delete_reservation')
 ]
 
