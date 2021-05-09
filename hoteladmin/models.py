@@ -107,6 +107,7 @@ class Restaurant(models.Model):
     status=models.CharField(max_length=3,choices=STATUS,default=OPEN)
     user=models.OneToOneField(User,on_delete=models.CASCADE,related_name='restaurant',null=True)
     rest_id=models.CharField(max_length=10,default='DEF001')
+    contact=models.CharField(max_length=10,default='')
     
     class Meta:
         constraints=[

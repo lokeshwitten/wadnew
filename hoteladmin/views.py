@@ -150,7 +150,10 @@ def view_profile(request):
         "user":user
     })
 def edit_profile(request):
-    pass
+    user=request.user
+    return render(request,"hoteladmin/editprofile.html",{
+        "user":user
+    })
 def downloadqr(request):
     pass
 def menu(request):
