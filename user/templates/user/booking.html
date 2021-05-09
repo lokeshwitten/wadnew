@@ -19,7 +19,8 @@
     <div class="jumbotron ">
         <div class="container text-center bookTable ">
             <h1 class="upper-case">Book Your Table</h1>
-            <h2>Tables Available : {{no}}</h2>
+            <h2>Restaurant : {{name}}</h2>
+            <h2>Tables available  in the choosen Time slot: {{no}}</h2>
             <h2 id='msg' style="color: red;"></h2>
 
 
@@ -77,27 +78,9 @@
 
 
 
-        <div class="form-group col-md-6 col-lg-6 col-sm-12">
-            <label for="date" class="col-lg-2 control-label">Date</label>
-            <div class="col-lg-10">
-                <div class="input-group">
-                    <span class="input-group-addon glyphicon glyphicon-hand-right"></span>
+       
 
-                    <input type="date" class="form-control" id="date" name="date" placeholder="Choose a Date" required>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group col-md-6 col-lg-6 col-sm-12">
-            <label for="time" class="col-lg-2 control-label">Time</label>
-            <div class="col-lg-10">
-
-                <div class="input-group">
-                    <span class="input-group-addon glyphicon glyphicon-hand-right"></span>
-                    <input type="time" class="form-control" id="time" name="time" placeholder="Choose a Time" required>
-                </div>
-            </div>
-        </div>
+        
 
 
         <div class="row">

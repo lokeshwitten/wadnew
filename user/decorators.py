@@ -215,26 +215,58 @@ def get_time(time,offset):
     return z.time()
 
 #Return the tables available 
-def get_avail_tables(Restaurant,date,time):
+def get_avail_tables(restaurant,date,time):
     list=[]
     string=''
-    populate(list,Restaurant.capacity)
+    populate(list,int(restaurant.capacity))
     list=[str(element) for element in list]
     begin=get_time(time,-1200)
     end=get_time(time,1200)
-    reservations=Reservations.objects.filter(restaurant=Restaurant,date=date,time__range=(begin,end))
+    reservations=Reservations.objects.filter(restaurant=restaurant,date=date,time__range=(begin,end))
     if reservations.count() == 0:
         return list
     else:
         for reservation in reservations:
             string+=reservation.table_no
         string=string[:len(string)-1]
+        if string=='': #Empty string -first reservation in the time slot
+            return list
+        else:
+            taken_tables=string.split(",")
+            avail_tables=Diff(taken_tables,list)
+            return avail_tables
+            
+def set_tableno(reservation):
+    restaurant=reservation.restaurant
+    avail_tables=get_avail_tables(restaurant,reservation.date,reservation.time)
+    table_no=extract_min(avail_tables,int(reservation.tables))
+    table_no=",".join(table_no)
+    table_no+=','
+    reservation.table_no=table_no
+    reservation.save()
+
+def get_capacity(restaurant,date,time):
+    list=[]
+    string=''
+    populate(list,int(restaurant.capacity))
+    list=[str(element) for element in list]
+    begin=get_time(time,-1200)
+    end=get_time(time,1200)
+    reservations=Reservations.objects.filter(restaurant=restaurant,date=date,time__range=(begin,end))
+    if reservations.count() == 0:
+        return len(list)
+    else:
+        for reservation in reservations:
+            string+=reservation.table_no
+        string=string[:len(string)-1]
         taken_tables=string.split(",")
         avail_tables=Diff(taken_tables,list)
-        return avail_tables
-            
-def set_tableno(Reservation,time):
-    max_capacity=Reservation.restaurant.capacity
+        return len(avail_tables)
+   
+    
+    
+    
+   
     
     
     

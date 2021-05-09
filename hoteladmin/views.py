@@ -150,5 +150,18 @@ def change_payment_status(request):
         order.save()
         data={"flag":True}
         return JsonResponse(data)
-        
+def change_waiter_alert(request):
+    order_no=request.GET.get('order_no',None)
+    order=Order.objects.get(order_no=order_no)
+    if order is None:
+        flag=False
+        data={"flag":flag}
+        return JsonResponse(data)
+    else:
+        flag=True
+        order.waiter_alerted=False
+        order.save()
+        table_no=order.table_no
+        data={"flag":flag,"table_no":table_no}
+        return JsonResponse(data)
     

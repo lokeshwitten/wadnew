@@ -9,6 +9,7 @@ urlpatterns = [
     path("/orders/<str:order_no>",views.expand_order,name='expandorder'),
     path("/logout",views.logout_view,name='logout'),
     path('/ajax/change_payment_status',views.change_payment_status,name='change_payment_status'),
-    path('/reservations',views.view_reservations,name='reservations')
+    path('/reservations',views.view_reservations,name='reservations'),
+    path('ajax/change_waiter_alert',views.change_waiter_alert,name='change_waiter_alert')
 ]
 

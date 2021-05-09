@@ -88,9 +88,18 @@ def booking(request,):
         request.session['rests']=request.POST['rest']
         rest_code=request.session['rests']
         restaurant=Restaurant.objects.get(rest_id=rest_code)
-        capacity=tables_avail(restaurant)
+        date=request.POST['date']
+        time=request.POST['time']
+        resdate=datetime.strptime(date,'%Y-%m-%d')
+        resdate=resdate.date()
+        restime=datetime.strptime(time,'%H:%M')
+        restime=restime.time()
+        request.session['reserdate']=date
+        request.session['resertime']=time
+        capacity=get_capacity(restaurant,resdate,restime)
         return render(request,"user/booking.html",{
-            "no":capacity
+            "no":capacity,"name":restaurant.name
+            
         })
     return HttpResponseRedirect(reverse('user:test'))
 def test(request):
@@ -101,21 +110,26 @@ def confirm_res(request):
     if request.method=="POST":
         tables=request.POST['no'] #No of the tables
         name=request.POST['name'] #Name of the customer
-        date=request.POST['date'] #date of reservation
-        time=request.POST['time'] #Time
+        date=request.session['reserdate'] #date of reservation
+        time=request.session['resertime'] #Time
+        #Coverting strings into time and date objects
+        resdate=datetime.strptime(date,'%Y-%m-%d')
+        resdate=resdate.date()
+        restime=datetime.strptime(time,'%H:%M')
+        restime=restime.time()
+        
         rest_code=request.session['rests']
         restaurant=Restaurant.objects.get(rest_id=rest_code)
         glob=Global.objects.get(pk=1)
         cnf_code='CNF'+str(glob.cnf_no)
        
         rest_id=request.session['rests']
-        reservation=Reservations.objects.create(conf_code=cnf_code,user=request.user,cust_name=name,date=date,
-        tables=tables,time=time,restaurant=restaurant)
+        reservation=Reservations.objects.create(conf_code=cnf_code,user=request.user,cust_name=name,date=resdate,
+        tables=tables,time=restime,restaurant=restaurant)
         if reservation is not None:
             glob.cnf_no +=1
             glob.save()
             set_tableno(reservation)
-            reservation.save()
             return render(request,"user/resconfirm.html",{
                 "reservation":reservation
             })
@@ -250,13 +264,26 @@ def view_reservation(request,conf_code):
     return render(request,"user/resexpand.html",{
         "reservation":reservation
     })
+    
+def rest(request):
+    restaurants=Restaurant.objects.all()
+    return render(request,"user/rest.html",{
+        "restaurants":restaurants
+    })   
+    
+    
+    
 '''AJAX Validation views'''
+
+#Validate username check if the username already exists. If so send a pop up
 def validate_username(request):
     username=request.GET['username']
     data = {
         'is_taken': User.objects.filter(username__iexact=username).exists()
     }
     return JsonResponse(data)
+
+#Check Whether the table no entered is valid or not
 def validate_table_no(request):
     table_no=request.GET['table_no']
     rest_code=request.session['rest']
@@ -283,11 +310,41 @@ def validate_table_no(request):
         data={"is_valid":flag}
         return JsonResponse(data)
     
-def rest(request):
-    restaurants=Restaurant.objects.all()
-    return render(request,"user/rest.html",{
-        "restaurants":restaurants
-    })
+#Request Waiter
+def ajax_request_waiter(request):
+    order_no=request.GET.get('order_no',None)
+    if order_no is None:
+        flag=False
+        data={"flag":flag}
+        return JsonResponse(data)
+    else:
+        try:
+            order=Order.objects.get(order_no=order_no)
+            order.waiter_alerted=True
+            order.save()
+            data={"flag":True}
+            return JsonResponse(data)
+        except:
+            flag=False
+            data={"flag":flag}
+            return JsonResponse(data)
+            
+def ajax_request_parcel(request):
+    order_no=request.GET.get('order_no',None)
+    if order_no is None:
+        flag=False
+        data={"flag":flag}
+        return JsonResponse(data)
+    else:
+        try:
+            order=Order.objects.get(order_no=order_no)
+            order.parcel_request=True
+            order.save()
+            data={"flag":True}
+            return JsonResponse(data)
+        except:
+            flag=False
+            data={"flag":flag}
+            return JsonResponse(data)
     
-
  

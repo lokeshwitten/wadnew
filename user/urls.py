@@ -26,7 +26,9 @@ urlpatterns = [
     path('/myorders',views.myorders,name='myorders'),
     path('/myreservations',views.myreservations,name='myreservations'),
     path('/reservations/<str:conf_code>',views.view_reservation,name='view_reservation'),
-    path('/pastorders',views.view_past_orders,name='past_orders')
+    path('/pastorders',views.view_past_orders,name='past_orders'),
+    path('/send_ajax_request_waiter',views.ajax_request_waiter,name='ajax_request_waiter'),
+    path('/ajax_request_parcel',views.ajax_request_parcel,name='ajax_request_parcel')
 
 ]
 if settings.DEBUG:

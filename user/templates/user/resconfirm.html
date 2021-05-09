@@ -15,6 +15,9 @@
         <li> Status of Reservation : {{reservation.status}}</li>
         <li>Restaurant : {{reservation.restaurant}}</li>
         <li> Table Nos : {{reservation.table_no}}</li>
+
+        <a href="{% url 'user:test' %}" >Back To Reservations</a>
+        <a href="{% url 'user:index'%}">Back To Index</a>
         
     </ul>
 </body>

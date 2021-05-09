@@ -21,7 +21,7 @@
     <!--New Fonts-->
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
     <link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
-    
+    <meta http-equiv="refresh" content="20">
 
 </head>
 <body><div class="tab-content">
@@ -46,8 +46,11 @@
                                 
                                 <th>Price</th>
                                 <th>Bill Status</th>
-                                <th>Change Bill Status </th>
-                                
+                                <th>Waiter Alert</th>
+                                <th>Parcel Request</th>
+                                <th>Waiter Alerted </th>
+                                <th>Change Payment Status</th>
+
 
                             </tr>
                             </thead>
@@ -72,7 +75,23 @@
                                 
                                 <td>{{order.price}}</td>
                                 <td>{{order.bill_status}}</td>
-                                <td> <button id="{{order.order_no}} " , onclick="send_ajax_request('{{order.order_no}}')"> Payment Recieved </button></td>
+
+                                
+                                {% if order.waiter_alerted %}
+                                    <td><img src="https://www.pngkit.com/png/detail/81-817437_check-mark-green-tick-mark-green-check-mark.png " height="20px" width="20px"></td>
+                                {% else %}
+                                    <td><img src="https://cdn3.vectorstock.com/i/1000x1000/59/87/red-cross-check-mark-icon-simple-style-vector-8375987.jpg" height="20px" width="20px"></td>
+                                {% endif %}
+
+                                {% if order.parcel_request %}
+                                <td><img src="https://www.pngkit.com/png/detail/81-817437_check-mark-green-tick-mark-green-check-mark.png" height="20px" width="20px"></td>
+                                {% else %}
+                                    <td><img src="https://cdn3.vectorstock.com/i/1000x1000/59/87/red-cross-check-mark-icon-simple-style-vector-8375987.jpg"  height="20px" width="20px"></td>
+                                {% endif %}
+                                
+                                <td> <button id="{{order.order_no}} " , onclick="send_ajax_request_waiter('{{order.order_no}}')"> Waiter Alerted</button></td>
+                                
+                                <td> <button id="{{order.order_no}} " , onclick="send_ajax_request_payment('{{order.order_no}}')"> Payment Recieved </button></td>
 
                             </tr>
                             {% endfor %}
@@ -88,7 +107,7 @@ green-bill paided
                             </table>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
-    function send_ajax_request(rest_id){
+    function send_ajax_request_payment(rest_id){
         $.ajax({
             url: '{% url "hoteladmin:change_payment_status" %}',
             contentType: "application/json;charset=utf-8",
@@ -104,6 +123,29 @@ green-bill paided
             }
         })
     }
+    function send_ajax_request_waiter(order_no){
+        $.ajax({
+            url: '{% url "hoteladmin:change_waiter_alert"  %}',
+            contentType: "application/json;charset=utf-8",
+            method: 'GET',
+            data: {
+                "order_no":order_no
+            },
+            
+            success: function(data){
+                if(data.flag){
+                    alert(`Waiter for ${data.table_no} is sent`)
+                }
+            }
+        })
+    }
+
+   
+        function autoRefresh() {
+            window.location = window.location.href;
+        }
+        setInterval('autoRefresh()', 10000);
+    
 </script>
 </body>
 </html>

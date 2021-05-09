@@ -35,6 +35,7 @@
               
 
               <div class="tp">
+                  <p>Table No : {{order.table_no}}</p>
                   <p>Item Price : {{order.price}}</p>
                   <p>Taxes: 0</p>
                   <P>Extra charges : 0</P>
@@ -51,13 +52,13 @@
                 <a href="{% url 'user:view_restaurant' code %}"><h2>Add Items</h2></a>
             </div>
             <div class="opt">
-                <a href=""><h2>Alert Waiter</h2></a>
+                <button onclick="send_ajax_request_waiter('{{order.order_no}}')"><h2>Alert Waiter</h2></button>
             </div>
             <div class="opt">
-                <a href="#Requestparcel"><h2>Request Parcel</h2></a>
+                <button onclick="send_ajax_request_parcel('{{order.order_no}}')"><h2>Request Parcel</h2></button>
             </div>
             <div class="opt">
-                <a href="#ReadytOpay"><h2>Ready To Pay</h2></a>
+               <h2>Ready To Pay</h2>
             </div>
             <div class="opt">
                 <a href="{% url 'user:index' %}"><h2>Index</h2></a>
@@ -77,5 +78,43 @@
         </div>
     </div>
     {% endif %}
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script>
+        function send_ajax_request_waiter(order_no){
+            $.ajax({
+                url: '{% url "user:ajax_request_waiter"  %}',
+                contentType: "application/json;charset=utf-8",
+                method: 'GET',
+                data: {
+                    "order_no":order_no
+                },
+                
+                success: function(data){
+                    if(data.flag){
+                        alert(`Request for the waiter has been sent`)
+                    }
+                }
+            })
+        }
+
+        function send_ajax_request_parcel(order_no){
+            $.ajax({
+                url: '{% url "user:ajax_request_parcel"  %}',
+                contentType: "application/json;charset=utf-8",
+                method: 'GET',
+                data: {
+                    "order_no":order_no
+                },
+                
+                success: function(data){
+                    if(data.flag){
+                        alert(`Request of parcel has been sent. A waiter will be with you shortly.`)
+                    }
+                }
+            })
+
+        }
+
+    </script>
 </body>
 </html>

@@ -62,6 +62,8 @@ class Order(models.Model):
     PAID='PAID'
     ORDER_STATUS=[(PENDING,'Pending'),(CONFIRM,'Confirm')]
     BILL_STATUS=[(PENDING,'Pending'),(PAID,'Paid')]
+    parcel_request=models.BooleanField(default=False,null=True)
+    waiter_alerted=models.BooleanField(default=False,null=True)
     order_no=models.CharField(max_length=10,primary_key=True)
     items=models.ManyToManyField(Item,related_name='+',null=True)
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='orders')
