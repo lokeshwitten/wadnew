@@ -30,6 +30,8 @@ urlpatterns = [
     path('/feedback/<str:order_no>',views.feedback,name='feedback'),
     path('feedback_success',views.feedback_success,name='feedback_success'),
     path('/send_ajax_request_waiter',views.ajax_request_waiter,name='ajax_request_waiter'),
+    path('ajax_check_reserv',views.ajax_check_reserv,name='check_reserv'),
+    path('/ajax_redirect',views.ajax_redirect,name='ajax_redirect'),
     path('/ajax_request_parcel',views.ajax_request_parcel,name='ajax_request_parcel')
 
 ]

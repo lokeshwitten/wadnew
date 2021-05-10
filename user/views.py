@@ -196,7 +196,7 @@ def order_conf(request):
                 return HttpResponseRedirect(reverse('user:view_order',args=[ordlatest.order_no]))
                 
         else:
-            table_no=request.POST['table_no']
+            table_no=int(request.POST['table_no'])
             cartdata=request.session['cart']
             order_no=get_order_no()
             rest_code=request.session['rest']
@@ -381,5 +381,32 @@ def ajax_request_parcel(request):
             flag=False
             data={"flag":flag}
             return JsonResponse(data)
-    
- 
+def ajax_check_reserv(request):
+    user=request.user
+    if user is None:
+        data={"flag":False}
+        return JsonResponse(data)
+    else:
+        now=datetime.now()
+        now=now.time()
+        begin=get_time(now,-1200)
+        end=get_time(now,1200)
+        reservations=Reservations.objects.filter(user=user,time__range=(begin,end))
+        if reservations.count()==0:
+            data={"flag":False}
+            return JsonResponse(data)
+        else:
+            reservation=reservations.last()
+            time=str(reservation.time)
+            date=str(reservation.date)
+            restaurant=reservation.restaurant
+            rest_id=restaurant.rest_id
+            name=restaurant.name
+            data={"flag":True,"time":time,"date":date,"name":name,"rest_id":rest_id}
+            return JsonResponse(data)
+            
+def ajax_redirect(request):
+    rest_id=request.GET['rest_id']
+    redirect=reverse('user:view_restaurant',args=[rest_id,])
+    data={"flag":True,"redirect":redirect}
+    return JsonResponse(data)

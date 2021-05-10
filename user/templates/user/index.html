@@ -148,7 +148,7 @@
             <a href=" "><img id="footimg " src="https://img.icons8.com/fluent/2x/twitter.png " alt=" "></a>
         </div>
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script>
         function openNav() {
           document.getElementById("mySidenav ").style.width = "250px ";
@@ -161,6 +161,41 @@
           document.getElementById("main ").style.marginLeft= "0 ";
           document.body.style.backgroundColor = "white ";
         }
+        function ajax_redirect(id){
+            $.ajax({
+                url :'{% url "user:ajax_redirect" %}',
+                method: 'GET',
+                data: {
+                    "rest_id":id
+                },
+                success: function(data){
+                    if (data.redirect) {
+                        // data.redirect contains the string URL to redirect to
+                        window.location.href = data.redirect;
+                    }
+                }
+               
+
+            })
+        }
+        $(document).ready(function () {
+          $.ajax({
+              url: '{% url "user:check_reserv" %}',
+              method: 'GET',
+              data: {
+                  "flag":true
+              },
+              success: function(data){
+                  if(data.flag){
+                      if(confirm('You have a reservation at the restaurant ' + data.name + 'at ' + data.time + '. Press Okay to be redirected to the restaurant page '))
+                      {
+                         ajax_redirect(data.rest_id)
+                      }
+                  }
+              }
+          })
+        });
+        
         </script>
 </body>
 </html>
